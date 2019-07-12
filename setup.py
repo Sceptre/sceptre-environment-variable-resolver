@@ -1,16 +1,23 @@
 from setuptools import setup, find_packages
 
-__version__ = "0.1.2"
+__version__ = "1.0.0"
 
-# More information on setting values: https://github.com/Sceptre/sceptre-resolver-template/wiki
+# More information on setting values:
+# https://github.com/Sceptre/project/wiki/sceptre-resolver-template
 
-RESOLVER_NAME = 'sceptre-resolver-template'  # lowercase, snakecase, use `-` as separator.
-RESOLVER_MODULE_NAME = 'resolver.resolver'  # do not change.
-RESOLVER_COMMAND_NAME = 'custom_resolver'  # the resolver call in sceptre e.g. !command_name.
-RESOLVER_CLASS = 'CustomResolver'  # CamelCase name of resolver class in resolver.resolver.
-RESOLVER_DESCRIPTION = ''  # one line summary description
-RESOLVER_AUTHOR = 'Sceptre'  # if multiple use a single string with comma separated names.
-RESOLVER_AUTHOR_EMAIL = 'sceptre@cloudreach.com'  # if multiple use single string with commas.
+# lowercase, snakecase, use `-` as separator.
+RESOLVER_NAME = 'sceptre-environment-variable-resolver'
+# the resolver call in sceptre e.g. !command_name.
+RESOLVER_COMMAND_NAME = 'environment_variable'
+# CamelCase name of resolver class in resolver.{RESOLVER_COMMAND_NAME}.py.
+RESOLVER_MODULE_NAME = 'resolver.{}'.format(RESOLVER_COMMAND_NAME)
+# one line summary description
+RESOLVER_CLASS = 'EnvironmentVariable'
+# if multiple use a single string with comma separated names.
+RESOLVER_DESCRIPTION = 'Resolve environment variables in Sceptre.'
+# if multiple use single string with commas.
+RESOLVER_AUTHOR = 'Sceptre'
+RESOLVER_AUTHOR_EMAIL = 'sceptre@cloudreach.com'
 RESOLVER_URL = 'https://github.com/sceptre/{}'.format(RESOLVER_NAME)
 
 with open("README.md") as readme_file:
@@ -38,11 +45,13 @@ setup(
     author_email=RESOLVER_AUTHOR_EMAIL,
     license='Apache2',
     url=RESOLVER_URL,
-    packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
+    packages=find_packages(
+        exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     py_modules=[RESOLVER_MODULE_NAME],
     entry_points={
         'sceptre.resolvers': [
-            "{}={}:{}".format(RESOLVER_COMMAND_NAME, RESOLVER_MODULE_NAME, RESOLVER_CLASS)
+            "{}={}:{}".format(RESOLVER_COMMAND_NAME,
+                              RESOLVER_MODULE_NAME, RESOLVER_CLASS)
         ]
     },
     include_package_data=True,

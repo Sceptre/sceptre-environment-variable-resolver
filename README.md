@@ -1,14 +1,17 @@
-# README
+# Environment Variable Resolver
 
-Add your resolver readme here. Remember to include the following:
+Fetches the value from an environment variable.
 
-- Tell people how to install it (e.g. pip install ...).
-- Be clear about the purpose of the resolver, its capabilities and limitations.
-- Tell people how to use it.
-- Give examples of the resolver in use.
+Syntax:
 
-Read our wiki to learn how to use this repo:
-https://github.com/Sceptre/sceptre-resolver-template/wiki
+```yaml
+parameter|sceptre_user_data:
+  <name>: !environment_variable ENVIRONMENT_VARIABLE_NAME
+```
 
-If you have any questions or encounter an issue
-[please open an issue](https://github.com/Sceptre/sceptre-resolver-template/issues/new)
+Example:
+
+```yaml
+parameters:
+  database_password: !environment_variable DATABASE_PASSWORD
+```
